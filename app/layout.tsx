@@ -1,5 +1,4 @@
 import { Toaster } from "@/components/ui/sonner";
-import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Sora } from "next/font/google";
 import JsonLd from "./components/JsonLd";
@@ -72,7 +71,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={sora.variable}>
+    <html lang="en" className={sora.variable} suppressHydrationWarning>
       <head>
         <JsonLd />
       </head>
@@ -81,7 +80,6 @@ export default function RootLayout({
       >
         {children}
         <Toaster />
-        <Analytics />
       </body>
     </html>
   );

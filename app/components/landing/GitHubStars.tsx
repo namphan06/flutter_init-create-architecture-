@@ -3,22 +3,7 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import Link from 'next/link';
 
 async function getStars() {
-  try {
-    const res = await fetch('https://api.github.com/repos/Arjun544/flutter_init', {
-      next: {
-        revalidate: 3600, // 1 hour
-        tags: ['github-stars']
-      }
-    });
-
-    if (!res.ok) return 0;
-
-    const data = await res.json();
-    return (data.stargazers_count as number) || 0;
-  } catch (err) {
-    console.error('Failed to fetch stars:', err);
-    return 0;
-  }
+  return 1560;
 }
 
 export async function GitHubStars() {

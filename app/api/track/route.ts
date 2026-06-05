@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 
 import { architectureSchema, navigationSchema, stateManagementSchema } from "@/app/lib/config/schema"
-import { createPublishableSupabaseClient } from "@/app/lib/supabase/server"
 
 const validBackendProviders = ["none", "firebase", "supabase", "appwrite", "custom"] as const
 const validNetworking = ["dio", "http", "none"] as const
@@ -77,13 +76,6 @@ export async function POST(req: NextRequest) {
         const payload = buildTrackPayload(body)
         if (!payload) {
             return NextResponse.json({ error: "invalid_payload" }, { status: 400 })
-        }
-
-        const supabase = createPublishableSupabaseClient()
-        const { error } = await supabase.from("generation_events").insert(payload)
-
-        if (error) {
-            return NextResponse.json({ error: "track_failed" }, { status: 503 })
         }
 
         return NextResponse.json({ ok: true }, { status: 202 })
